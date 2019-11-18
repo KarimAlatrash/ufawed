@@ -1,0 +1,54 @@
+{
+
+ "background": {
+      "persistent": true,
+      "scripts": [ "JudgementDay.js"]
+   },
+  "manifest_version": 2,
+
+  "name": "UFA Wed Auto Registrant",
+  "description": "Register for wednesday sessions first!",
+  "version": "1.0",
+  "icons": {
+      "128": "icons/128x128.png",
+      "16": "icons/16x16.png",
+      "48": "icons/48x48.png"
+   },
+
+  "browser_action": {
+    "default_icon": "icons/32x32.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+	   "tabs",
+     "activeTab",
+     "notifications",
+     "*://wed.ufacademy.org/*"
+     ],
+"content_scripts": [{
+      "matches": ["https://wed.ufacademy.org/login.php"],
+      "js": ["login.js"]
+  },
+	{
+      "matches": [ "https://wed.ufacademy.org/history.php" ],
+	  "js": [ "injectButtons.js" ]
+   } ,
+   {
+       "matches": [ "https://wed.ufacademy.org/", "https://wed.ufacademy.org/index.php" ],
+ 	  "js": [ "gotoSession.js" ]
+    },
+    {
+        "matches": [ "*://wed.ufacademy.org/registeredsessions"],
+  	  "js": [ "showRegisteredSessions.js" ]
+     },
+     {
+         "matches": [ "https://wed.ufacademy.org/reset"],
+   	  "js": [ "resetLogin.js" ]
+      },
+    {
+    "matches": [ "https://wed.ufacademy.org/sessions.php"],
+    "js": [ "registerSession.js" ]
+    } ],
+
+  "web_accessible_resources": [ "registerSession.js", "gotoSession.js", "content_script.js", "login.js", "resetLogin.js", "showRegisteredSessions.js" ]
+}
